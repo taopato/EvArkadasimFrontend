@@ -1,30 +1,27 @@
 import React, { useState } from 'react';
 import { View, TextInput, Button, Alert, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../services/api';
 
-const LoginScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
   const [userName, setUserName] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = async () => {
+  const handleRegister = async () => {
     if (!userName || !password) {
       Alert.alert('Hata', 'Kullanıcı adı ve şifre gereklidir.');
       return;
     }
 
     try {
-      const response = await api.post('/Auth/login', { userName, password });
+      const response = await api.post('/Auth/register', { userName, password });
 
       if (response.status === 200) {
-        const { token } = response.data;
-        await AsyncStorage.setItem('token', token); // Token'ı kaydet
-        Alert.alert('Başarılı', 'Giriş başarılı!');
-        navigation.navigate('Home'); // Ana ekrana yönlendirme
+        Alert.alert('Başarılı', 'Kayıt başarılı! Şimdi giriş yapabilirsiniz.');
+        navigation.navigate('Login'); // Login ekranına yönlendirme
       }
     } catch (error) {
-      console.error('Login Hatası:', error.message);
-      const errorMessage = error.response?.data?.Message || 'Giriş yapılamadı. Lütfen bilgilerinizi kontrol edin.';
+      console.error('Register Hatası:', error.message);
+      const errorMessage = error.response?.data?.Message || 'Kayıt sırasında bir sorun oluştu.';
       Alert.alert('Hata', errorMessage);
     }
   };
@@ -44,15 +41,14 @@ const LoginScreen = ({ navigation }) => {
         value={password}
         onChangeText={setPassword}
       />
-      <Button title="Giriş Yap" onPress={handleLogin} />
+      <Button title="Kayıt Ol" onPress={handleRegister} />
     </View>
   );
 };
-Alert.alert('Hata', error.response?.data || 'Bir sorun oluştu, lütfen tekrar deneyin.');
 
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 20, justifyContent: 'center' },
   input: { height: 40, borderColor: 'gray', borderWidth: 1, marginBottom: 20, paddingHorizontal: 10 },
 });
 
-export default LoginScreen;
+export default RegisterScreen;
