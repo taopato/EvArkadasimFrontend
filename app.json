@@ -4,30 +4,31 @@
     "slug": "ev-arkadasim",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png", 
+    "icon": "./assets/images/icon.png",
     "splash": {
-      "image": "./assets/images/splash.png", 
+      "image": "./assets/images/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true, 
-      "bundleIdentifier": "com.evarkadasim.app" 
+      "supportsTablet": true,
+      "bundleIdentifier": "com.evarkadasim.app",
+      "newArchEnabled": true
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.evarkadasim.app", 
-      "newArchEnabled": true 
+      "package": "com.evarkadasim.app",
+      "newArchEnabled": true
     },
     "web": {
-      "favicon": "./assets/images/favicon.png" 
+      "favicon": "./assets/images/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "your-eas-project-id" 
+        "projectId": "your-eas-project-id"
       }
     }
   }
